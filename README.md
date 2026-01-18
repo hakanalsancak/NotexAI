@@ -26,8 +26,6 @@ A beautiful, professional note-taking application with AI-powered enhancement ca
 - **🎨 Stunning UI** - Glassmorphism design with smooth animations
 - **📱 Responsive** - Works beautifully on desktop and mobile
 
-## 🚀 Quick Start
-
 ### Prerequisites
 
 - Node.js 18+ 

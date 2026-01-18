@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Sparkles, FileText, Brain, Shield, ArrowRight, Zap, Globe } from 'lucide-react';
 
 export default function HomePage() {
@@ -8,8 +9,13 @@ export default function HomePage() {
       <header className="fixed top-0 left-0 right-0 z-50 glass">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-midnight-950" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center p-1.5">
+              <Image
+                src="/Logo.png"
+                alt="NotexAI Logo"
+                width={28}
+                height={28}
+              />
             </div>
             <span className="font-display text-2xl font-bold text-white">NotexAI</span>
           </div>
@@ -221,8 +227,13 @@ export default function HomePage() {
       <footer className="py-12 px-6 border-t border-midnight-700">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-midnight-950" />
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center p-1">
+              <Image
+                src="/Logo.png"
+                alt="NotexAI Logo"
+                width={22}
+                height={22}
+              />
             </div>
             <span className="font-display text-lg font-bold text-white">NotexAI</span>
           </div>

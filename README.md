@@ -34,82 +34,6 @@ A beautiful, professional note-taking application with AI-powered enhancement ca
 - PostgreSQL database
 - OpenAI API key (for AI features)
 
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <your-repo-url>
-   cd notex-ai
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables**
-   ```bash
-   cp env.example .env.local
-   ```
-   
-   Edit `.env.local` with your configuration:
-   ```env
-   DATABASE_URL="postgresql://user:password@localhost:5432/notexai"
-   AUTH_SECRET="your-secret-here"  # Generate with: openssl rand -base64 32
-   AUTH_URL="http://localhost:3000"
-   OPENAI_API_KEY="sk-your-openai-api-key"
-   ```
-
-4. **Set up the database**
-   ```bash
-   npm run db:generate
-   npm run db:push
-   ```
-
-5. **Start the development server**
-   ```bash
-   npm run dev
-   ```
-
-6. **Open in browser**
-   Visit [http://localhost:3000](http://localhost:3000)
-
-## 🗄️ Database Setup
-
-### Option 1: Local PostgreSQL
-
-```bash
-# Create database
-createdb notexai
-
-# Or using psql
-psql -U postgres -c "CREATE DATABASE notexai;"
-```
-
-### Option 2: Docker
-
-```bash
-docker run --name notexai-db -e POSTGRES_PASSWORD=password -e POSTGRES_DB=notexai -p 5432:5432 -d postgres:15
-```
-
-### Option 3: Cloud Database
-
-Use services like:
-- [Neon](https://neon.tech) (Free tier available)
-- [Supabase](https://supabase.com) (Free tier available)
-- [Railway](https://railway.app)
-- [PlanetScale](https://planetscale.com)
-
-## 🤖 AI Configuration
-
-To enable AI-powered note enhancement:
-
-1. Get an API key from [OpenAI Platform](https://platform.openai.com/api-keys)
-2. Add to your `.env.local`:
-   ```env
-   OPENAI_API_KEY="sk-your-api-key-here"
-   ```
-
 The AI enhancement feature supports:
 - **Improve Writing** - Fix grammar, enhance clarity and flow
 - **Summarize** - Create concise summaries
@@ -148,26 +72,6 @@ notex-ai/
 | AI | OpenAI GPT-4o-mini |
 | Icons | Lucide React |
 
-## 📝 Available Scripts
-
-```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Run ESLint
-npm run db:generate  # Generate Prisma client
-npm run db:push      # Push schema to database
-npm run db:studio    # Open Prisma Studio
-```
-
-## 🔒 Environment Variables
-
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `DATABASE_URL` | PostgreSQL connection string | ✅ |
-| `AUTH_SECRET` | NextAuth.js secret key | ✅ |
-| `AUTH_URL` | Application URL | ✅ |
-| `OPENAI_API_KEY` | OpenAI API key | ❌ (for AI features) |
 
 ## 🎨 Customization
 
@@ -182,12 +86,6 @@ The app uses:
 - **Playfair Display** - Headings
 - **DM Sans** - Body text
 - **JetBrains Mono** - Code blocks
-
-## 📄 License
-
-MIT License - feel free to use this project for personal or commercial purposes.
-
----
 
 <div align="center">
   <p>Built with ❤️ for thinkers everywhere</p>

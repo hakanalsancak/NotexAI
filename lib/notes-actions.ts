@@ -87,6 +87,8 @@ export async function createNote(data: {
   title: string;
   content: string;
   folderId?: string;
+  isPinned?: boolean;
+  isArchived?: boolean;
 }) {
   const session = await auth();
   if (!session?.user?.id) {
@@ -100,6 +102,8 @@ export async function createNote(data: {
         content: data.content,
         userId: session.user.id,
         folderId: data.folderId,
+        isPinned: data.isPinned ?? false,
+        isArchived: data.isArchived ?? false,
       },
     });
 

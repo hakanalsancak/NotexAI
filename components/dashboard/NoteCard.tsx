@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Pin, Archive, Trash2, MoreVertical, Clock } from 'lucide-react';
@@ -25,6 +25,12 @@ interface NoteCardProps {
 export function NoteCard({ note, index }: NoteCardProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [timeAgo, setTimeAgo] = useState<string>('');
+
+  // Calculate time ago only on client to avoid hydration mismatch
+  useEffect(() => {
+    setTimeAgo(getTimeAgo(note.updatedAt));
+  }, [note.updatedAt]);
 
   // Strip HTML tags for preview
   const contentPreview = note.content
@@ -68,8 +74,6 @@ export function NoteCard({ note, index }: NoteCardProps) {
     setIsLoading(false);
     setIsMenuOpen(false);
   }
-
-  const timeAgo = getTimeAgo(note.updatedAt);
 
   return (
     <motion.div
@@ -140,7 +144,7 @@ export function NoteCard({ note, index }: NoteCardProps) {
         {/* Timestamp */}
         <div className="flex items-center gap-1 text-xs text-midnight-500">
           <Clock className="w-3 h-3" />
-          {timeAgo}
+          <span suppressHydrationWarning>{timeAgo}</span>
         </div>
       </Link>
 

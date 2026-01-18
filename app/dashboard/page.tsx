@@ -5,7 +5,7 @@ import { FileText, Plus } from 'lucide-react';
 import Link from 'next/link';
 
 interface DashboardPageProps {
-  searchParams: { search?: string };
+  searchParams: Promise<{ search?: string }>;
 }
 
 async function NotesList({ search }: { search?: string }) {
@@ -63,17 +63,19 @@ function NotesLoading() {
   );
 }
 
-export default function DashboardPage({ searchParams }: DashboardPageProps) {
+export default async function DashboardPage({ searchParams }: DashboardPageProps) {
+  const { search } = await searchParams;
+  
   return (
     <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-display font-bold mb-1">
-            {searchParams.search ? 'Search Results' : 'All Notes'}
+            {search ? 'Search Results' : 'All Notes'}
           </h1>
           <p className="text-midnight-400">
-            {searchParams.search 
-              ? `Showing results for "${searchParams.search}"`
+            {search 
+              ? `Showing results for "${search}"`
               : 'Your personal knowledge base'
             }
           </p>
@@ -85,7 +87,7 @@ export default function DashboardPage({ searchParams }: DashboardPageProps) {
       </div>
 
       <Suspense fallback={<NotesLoading />}>
-        <NotesList search={searchParams.search} />
+        <NotesList search={search} />
       </Suspense>
     </div>
   );

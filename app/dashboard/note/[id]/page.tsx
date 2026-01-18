@@ -3,11 +3,12 @@ import { getNote } from '@/lib/notes-actions';
 import { NoteEditor } from '@/components/editor/NoteEditor';
 
 interface NotePageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function NotePage({ params }: NotePageProps) {
-  const note = await getNote(params.id);
+  const { id } = await params;
+  const note = await getNote(id);
 
   if (!note) {
     notFound();

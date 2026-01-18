@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Search, Bell, ChevronDown, LogOut, User as UserIcon } from 'lucide-react';
 import { logoutUser } from '@/lib/auth-actions';
 import toast from 'react-hot-toast';
@@ -18,8 +18,9 @@ interface NavbarProps {
 
 export function Navbar({ user }: NavbarProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
 
   async function handleLogout() {
     await logoutUser();
@@ -28,18 +29,25 @@ export function Navbar({ user }: NavbarProps) {
     router.refresh();
   }
 
-  function handleSearch(e: React.FormEvent) {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/dashboard?search=${encodeURIComponent(searchQuery)}`);
-    }
-  }
+  // Live search with debounce
+  useEffect(() => {
+    const debounceTimer = setTimeout(() => {
+      if (searchQuery.trim()) {
+        router.push(`/dashboard?search=${encodeURIComponent(searchQuery)}`);
+      } else {
+        // Clear search when input is empty
+        router.push('/dashboard');
+      }
+    }, 300); // 300ms debounce
+
+    return () => clearTimeout(debounceTimer);
+  }, [searchQuery, router]);
 
   return (
     <header className="sticky top-0 z-30 glass border-b border-white/10">
       <div className="flex items-center justify-between px-6 py-4">
         {/* Search */}
-        <form onSubmit={handleSearch} className="flex-1 max-w-xl ml-12 lg:ml-0">
+        <div className="flex-1 max-w-xl ml-12 lg:ml-0">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-midnight-400" />
             <input
@@ -50,7 +58,7 @@ export function Navbar({ user }: NavbarProps) {
               className="w-full pl-12 pr-4 py-2.5 rounded-xl bg-midnight-800/50 border border-white/10 text-white placeholder-midnight-400 focus:outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/20 transition-all"
             />
           </div>
-        </form>
+        </div>
 
         {/* Right Side */}
         <div className="flex items-center gap-4 ml-4">

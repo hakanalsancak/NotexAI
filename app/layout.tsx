@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   title: 'NotexAI - AI-Powered Note Taking',
   description: 'Transform your thoughts into beautifully organized notes with AI assistance',
   keywords: ['notes', 'ai', 'productivity', 'writing', 'organization'],
+  icons: {
+    icon: '/Logo.png',
+    shortcut: '/Logo.png',
+    apple: '/Logo.png',
+  },
 };
 
 export default function RootLayout({

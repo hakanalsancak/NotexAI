@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
-  Sparkles,
   FileText,
   FolderOpen,
   Archive,
@@ -72,8 +72,13 @@ export function Sidebar() {
         {/* Logo */}
         <div className="p-6 pb-4">
           <Link href="/dashboard" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-midnight-950" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center p-1.5">
+              <Image
+                src="/Logo.png"
+                alt="NotexAI Logo"
+                width={28}
+                height={28}
+              />
             </div>
             <span className="font-display text-xl font-bold text-white">NotexAI</span>
           </Link>
